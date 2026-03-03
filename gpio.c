@@ -179,6 +179,12 @@ void relay_script( int state) {
 			power_state = 0;
 		}
 	}
+	else if (gpio_state >= 3 && gpio_state < 10) {
+		cmdline[argloc] = '0' + gpio_state;
+		if ((err = system(cmdline)) != 0){
+			fprintf (stderr, "%s exit status = %d\n", cmdline, err);
+		}
+	}
 // Done!
 }
 

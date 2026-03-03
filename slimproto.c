@@ -313,6 +313,10 @@ static void process_strm(u8_t *pkt, int len) {
 			} else if (output.state != OUTPUT_OFF) {
 				output.state = OUTPUT_STOPPED;
 				output.stop_time = gettime_ms();
+
+#if GPIO
+				relay_script(3);
+#endif // GPIO
 			}
 			UNLOCK_O;
 			if (!interval) sendSTAT("STMp", 0);
@@ -331,6 +335,9 @@ static void process_strm(u8_t *pkt, int len) {
 		break;
 	case 'u':
 		{
+#if GPIO
+				relay_script(4);
+#endif // GPIO
 			unsigned jiffies = unpackN(&strm->replay_gain);
 			LOCK_O;
 			output.state = jiffies ? OUTPUT_START_AT : OUTPUT_RUNNING;
