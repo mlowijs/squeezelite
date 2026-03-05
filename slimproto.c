@@ -315,7 +315,8 @@ static void process_strm(u8_t *pkt, int len) {
 				output.stop_time = gettime_ms();
 
 #if GPIO
-				relay_script(3);
+				if (power_script != NULL)
+					relay_script(3);
 #endif // GPIO
 			}
 			UNLOCK_O;
@@ -336,6 +337,7 @@ static void process_strm(u8_t *pkt, int len) {
 	case 'u':
 		{
 #if GPIO
+			if (power_script != NULL)
 				relay_script(4);
 #endif // GPIO
 			unsigned jiffies = unpackN(&strm->replay_gain);
