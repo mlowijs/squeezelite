@@ -26,7 +26,7 @@
 
 #define MAJOR_VERSION "2.0"
 #define MINOR_VERSION "0"
-#define MICRO_VERSION "1561"
+#define MICRO_VERSION "1609"
 
 #if defined(CUSTOM_VERSION)
 #define VERSION MAJOR_VERSION "." MINOR_VERSION "-" MICRO_VERSION STR(CUSTOM_VERSION)
@@ -478,6 +478,7 @@ char* strcasestr(const char *haystack, const char *needle);
 char *next_param(char *src, char c);
 u32_t gettime_ms(void);
 void get_mac(u8_t *mac);
+bool is_mac_nz(u8_t *mac);
 void set_nonblock(sockfd s);
 void set_recvbufsize(sockfd s);
 int connect_timeout(sockfd sock, const struct sockaddr *addr, socklen_t addrlen, int timeout);
@@ -641,7 +642,7 @@ typedef enum { FADE_NONE = 0, FADE_CROSSFADE, FADE_IN, FADE_OUT, FADE_INOUT } fa
 #define MONO_RIGHT	0x02
 #define MONO_LEFT	0x01
 #define MAX_SUPPORTED_SAMPLERATES 20
-#define TEST_RATES = { 1536000, 1411200, 768000, 705600, 384000, 352800, 192000, 176400, 96000, 88200, 48000, 44100, 32000, 24000, 22500, 16000, 12000, 11025, 8000, 0 }
+#define TEST_RATES = { 1536000, 1411200, 768000, 705600, 384000, 352800, 192000, 176400, 96000, 88200, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 0 }
 
 struct outputstate {
 	output_state state;
